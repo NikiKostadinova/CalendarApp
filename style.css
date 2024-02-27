@@ -26,7 +26,7 @@ body{
     background-color: #373c4f;
 }
 .left{
-    width: 60%;
+    width: 90%;
     padding: 20px;
 }
 .calendar{
@@ -205,4 +205,9 @@ color: var(--primary-clr);
 .calendar .goto-today button:hover{
     color: #fff;
     background-color: var(--primary-clr);
+}
+.calendar .goto-today .goto button{
+    border: none;
+    border-left: 1px solid var(--primary-clr);
+    border-radius: 0;
 }
