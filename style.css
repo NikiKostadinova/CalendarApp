@@ -311,14 +311,14 @@ color: var(--primary-clr);
 .events .event:hover .title .event-time {
     color: #fff;
 }
- .event-time{
+.events .event .event-time{
     font-size: 0.8rem;
     font-weight: 200;
     color: #878895;
     margin-left: 15px;
     pointer-events: none;
 }
-.event::after {
+.events.event::after {
     content: "✓";
     position: absolute;
     top: 50%;
@@ -331,7 +331,7 @@ color: var(--primary-clr);
     color: var(--primary-clr);
     transform: translateY(-50%);
 }
-.event:hover::after{
+.events.event:hover::after{
     display: flex;
 }
 .add-event-wrapper{
