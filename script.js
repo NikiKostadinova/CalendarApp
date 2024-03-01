@@ -6,8 +6,9 @@ const next = document.querySelector(".next");
 const todayBtn = document.querySelector(".today-btn");
 const gotoBtn = document.querySelector(".goto-btn");
 const dateInput = document.querySelector(".date-input");
-
-
+const eventDay = document.querySelector(".event-day");
+const eventDate = document.querySelector(".event-date");
+const eventsContainer = document.querySelector(".events");
 
 
 let today = new Date();
@@ -30,7 +31,7 @@ const months = [
     "December"
 ];
 
-const eventArr = [
+const eventsArr = [
     {
         day: 16,
         month: 3,
@@ -79,7 +80,7 @@ function initCalendar() {
     for (let i = 1; i <= lastDate; i++) {
 
         let event = false;
-        eventArr.forEach((eventObj) => {
+        eventsArr.forEach((eventObj) => {
             if(eventObj.day === i && eventObj.month === month + 1 && eventObj.year === year){
                 event = true;
             }
@@ -88,6 +89,9 @@ function initCalendar() {
         if (i === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
            
 
+            activeDay = i;
+            getActiveDay(i);
+            updateEvents(i);
 
            if(event){
             days += `<div class="day today active event" >${i}</div>`;
@@ -226,6 +230,8 @@ function addListener(){
             activeDay = Number(e.target.innerHTML);
 
             getActiveDay(e.target.innerHTML);
+            updateEvents(Number(e.target.innerHTML));
+
 
             days.forEach((day) =>{
                 day.classList.remove("active");
@@ -262,12 +268,43 @@ function addListener(){
     });
 }
 
-const eventDay = document.querySelector(".event-day");
-const eventDate = document.querySelector(".event-date");
+
 
 function getActiveDay(date){
     const day = new Date(year, month, date);
     const dayName = day.toString().split(" ")[0];
     eventDay.innerHTML = dayName;
     eventDate.innerHTML = date + " " + months[month] + " " + year;
+}
+
+function updateEvents(date){
+    
+    let events = "";
+    eventsArr.forEach((eventObj) =>{
+       
+        
+        if( date === eventObj.day && month + 1 === eventObj.month  && year === eventObj.year ){
+            eventObj.events.forEach((event) => {
+            events += `
+            <div class="event">
+            <div class="title">
+            <i class="fas fa-circle"></i>
+            <h3 class="event-title">${event.title}</h3>
+            </div>
+            <div class="event-time">
+            <span class="event-time">${event.time}</span>
+            </div>
+            </div>
+            `;
+          });
+        }
+    });
+
+    if(events === ""){
+        events = `<div class="no-event">
+        <h3>No Events</h3>
+        </div>`;
+    }
+
+    eventsContainer.innerHTML = events;
 }
