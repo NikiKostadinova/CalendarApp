@@ -127,3 +127,23 @@ function gotoDate(){
 
     alert("Invalid date");
 }
+
+const addEventBtn = document.querySelector(".add-event");
+const addEventContainer = document.querySelector(".add-event-wrapper");
+const addEventCloseBtn = document.querySelector(".close");
+const addEventTitle = document.querySelector(".event-name");
+const addEventFrom = document.querySelector(".event-time-from");
+const addEventTo = document.querySelector(".event-time-to");
+
+
+addEventBtn.addEventListener("click", () =>{
+    addEventContainer.classList.toggle("active");
+});
+addEventCloseBtn.addEventListener("click", () =>{
+    addEventContainer.classList.toggle("active");
+});
+document.addEventListener("click", (e) =>{
+    if(e.target !== addEventBtn && !addEventContainer.contains(e.target)){
+        addEventContainer.classList.remove("active");
+    }
+})
